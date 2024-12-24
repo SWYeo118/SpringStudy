@@ -7,6 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import java.util.List;
+
 @SpringBootApplication
 public class CruddemoApplication {
 
@@ -17,18 +19,36 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			createStudent(studentDAO);
+			queryForStudentByLastName(studentDAO);
 		};
+	}
+
+	private void queryForStudentByLastName(StudentDAO studentDAO) {
+		Student theStudent = studentDAO.findByLastName("Sangwoo");
+		System.out.println("Student Name : " + theStudent);
+	}
+
+	private void queryForStudent(StudentDAO studentDAO) {
+		List<Student> studentList = studentDAO.findAll();
+		for (Student student : studentList) {
+			System.out.println(student);
+		}
 	}
 
 	private void createStudent(StudentDAO studentDAO) {
 		System.out.println("Creating new student object ...");
-		Student tempStudent = new Student("Yeo", "Sangwoo", "effortmeta@gmail.com");
+		Student tempStudent1 = new Student("Ahn", "Yeji", "ahn@naver.com");
+		Student tempStudent2 = new Student("kim", "wonho", "kim@gmail.com");
+		Student tempStudent3 = new Student("kang", "haneul", "kang@gmail.com");
 
 		System.out.println("Saving the student ...");
-		studentDAO.save(tempStudent);
+		studentDAO.save(tempStudent1);
+		studentDAO.save(tempStudent2);
+		studentDAO.save(tempStudent3);
 
-		System.out.println("saved student. Generated id : " + tempStudent.getId());
+		System.out.println("saved student. Generated id : " + tempStudent1.getId());
+		System.out.println("saved student. Generated id : " + tempStudent2.getId());
+		System.out.println("saved student. Generated id : " + tempStudent3.getId());
 	}
 
 }
