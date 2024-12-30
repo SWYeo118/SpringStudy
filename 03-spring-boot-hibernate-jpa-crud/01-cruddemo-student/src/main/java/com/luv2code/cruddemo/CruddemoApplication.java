@@ -26,8 +26,6 @@ public class CruddemoApplication {
 	private void updateStudent(StudentDAO studentDAO) {
 		int studentId = 1;
 		Student student = studentDAO.findById(studentId);
-		student.setFirstName("scooby2");
-
 		studentDAO.update(student);
 	}
 

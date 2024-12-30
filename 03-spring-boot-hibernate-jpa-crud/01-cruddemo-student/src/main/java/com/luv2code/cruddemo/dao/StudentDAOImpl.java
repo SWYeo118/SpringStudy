@@ -48,6 +48,7 @@ public class StudentDAOImpl implements StudentDAO {
     @Override
     @Transactional
     public void update(Student theStudent) {
+        theStudent.setFirstName("Scooby3");
         entityManager.merge(theStudent);
     }
 }
