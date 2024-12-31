@@ -19,7 +19,9 @@ public class CruddemoApplication {
 	@Bean
 	public CommandLineRunner commandLineRunner(StudentDAO studentDAO) {
 		return runner -> {
-			updateStudent(studentDAO);
+//			deleteStudent(studentDAO);
+			deleteStudentAll(studentDAO);
+//			updateStudent(studentDAO);
 		};
 	}
 
@@ -55,6 +57,18 @@ public class CruddemoApplication {
 		System.out.println("saved student. Generated id : " + tempStudent1.getId());
 		System.out.println("saved student. Generated id : " + tempStudent2.getId());
 		System.out.println("saved student. Generated id : " + tempStudent3.getId());
+	}
+	private void deleteStudent(StudentDAO studentDAO) {
+		int studentId = 3;
+		System.out.println("Deleting student id : " + studentId);
+		studentDAO.delete(studentId);
+	}
+
+	private void deleteStudentAll(StudentDAO studentDAO) {
+		System.out.println("Deleting all student");
+		int numRowsDeleted = studentDAO.deleteAll();
+		System.out.println("Deleted row count is " + numRowsDeleted);
+
 	}
 
 }
