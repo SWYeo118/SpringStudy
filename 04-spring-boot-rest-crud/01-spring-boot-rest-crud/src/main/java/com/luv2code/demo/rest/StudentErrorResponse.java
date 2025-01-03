@@ -1,7 +1,5 @@
 package com.luv2code.demo.rest;
 
-import java.time.LocalDateTime;
-
 public class StudentErrorResponse {
 
     private int status;

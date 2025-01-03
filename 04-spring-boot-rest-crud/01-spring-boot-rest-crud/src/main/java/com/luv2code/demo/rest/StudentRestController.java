@@ -41,17 +41,4 @@ public class StudentRestController {
         return theStudents.get(studentId);
     }
 
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handlingExeption(StudentNotFoundException exception) {
-        StudentErrorResponse response = new StudentErrorResponse();
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        LocalDateTime localDateTime = LocalDateTime.now();
-        String time = localDateTime.format(dateTimeFormatter);
-
-        response.setStatus(HttpStatus.NOT_FOUND.value());
-        response.setMessage(exception.getMessage());
-        response.setTimeStamp(time);
-        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-
-    }
 }
